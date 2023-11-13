@@ -1,0 +1,138 @@
+definitions:
+  models.ResponseError:
+    properties:
+      error:
+        type: string
+    type: object
+  models.ResponseOK:
+    properties:
+      message:
+        type: string
+    type: object
+  models.UpdateEmailData:
+    properties:
+      new_email:
+        type: string
+    required:
+    - new_email
+    type: object
+  models.UpdatePasswordData:
+    properties:
+      confirm_password:
+        type: string
+      new_password:
+        type: string
+      old_password:
+        type: string
+    type: object
+info:
+  contact: {}
+  description: Profile Service for handling user dashboard and profile pages.
+  termsOfService: http://example.com/terms/
+  title: Profile Service
+  version: "1.0"
+paths:
+  /dashboard:
+    get:
+      consumes:
+      - application/json
+      description: Get the dashboard of the logged-in user.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User dashboard retrieved successfully
+          schema:
+            $ref: '#/definitions/models.ResponseOK'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      security:
+      - BearerAuth: []
+      summary: Get User Dashboard
+  /profile:
+    get:
+      consumes:
+      - application/json
+      description: Get the profile of the logged-in user.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User profile retrieved successfully
+          schema:
+            $ref: '#/definitions/models.ResponseOK'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      security:
+      - BearerAuth: []
+      summary: Get User Profile
+  /profile/email:
+    put:
+      consumes:
+      - application/json
+      description: Update the email of the logged-in user.
+      parameters:
+      - description: Update Email Data
+        in: body
+        name: updateData
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateEmailData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Email updated successfully
+          schema:
+            $ref: '#/definitions/models.ResponseOK'
+        "400":
+          description: Bad request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      security:
+      - BearerAuth: []
+      summary: Update User Email
+  /profile/password:
+    put:
+      consumes:
+      - application/json
+      description: Update the password of the logged-in user.
+      parameters:
+      - description: Update Password Data
+        in: body
+        name: updateData
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdatePasswordData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Password updated successfully
+          schema:
+            $ref: '#/definitions/models.ResponseOK'
+        "400":
+          description: Bad request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      security:
+      - BearerAuth: []
+      summary: Update User Password
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

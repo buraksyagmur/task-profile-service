@@ -1,1 +1,2 @@
 # task-profile-service
+# swagger:

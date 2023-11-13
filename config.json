@@ -1,0 +1,15 @@
+{
+    "database": {
+      "username": "profile-service",
+      "password": "1234",
+      "host": "localhost",
+      "port": "3306",
+      "name": "user_registration_db"
+    },
+    "email": {
+      "smtp_server": "smtp.gmail.com",
+      "smtp_port": 587,
+      "username": "burak.yagmur98@gmail.com",
+      "password": "xlkb ovve mqar xrvx"
+    }
+  }
